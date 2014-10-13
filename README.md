@@ -114,7 +114,7 @@ Focus on solving the first board included in `runner.rb`.  Again, **note**, this
 Remember, starting with a simple test case can be very helpful when approaching complicated problems. For a Sudoku solver, what's the simplest case? (besides being passed an already solved board.) Try working with a board that is only missing one number:
 
 ```
-405269781682571493197834562826195347374682915951743628519326874248957136763418259
+4-5269781682571493197834562826195347374682915951743628519326874248957136763418259
 ```
 
 ### Release 1: Test for multiple cases and add reporting
