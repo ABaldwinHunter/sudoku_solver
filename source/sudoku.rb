@@ -1,10 +1,33 @@
 require_relative 'cell'
 
 class Sudoku
-  attr_accessor :board
+  attr_accessor :board, :possibilities
 
   def initialize(board_string)
     @board = board_string.split("")
+    @possibilities = Hash.new
+    initialize_possibilities!
+  end
+
+  def initialize_possibilities!
+    board.each_with_index do |ele, i|
+      if ele == "-"
+        possibilities[i] = [*"1".."9"]
+      end
+    end
+  end
+
+  def check_row
+
+
+  end
+
+  def check_col
+
+  end
+
+  def check_block
+
   end
 
   def rows
