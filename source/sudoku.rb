@@ -1,7 +1,10 @@
 require_relative 'cell'
 
 class Sudoku
+  attr_accessor :board
+
   def initialize(board_string)
+    @board = board_string.split("")
   end
 
 
