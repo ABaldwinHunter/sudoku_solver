@@ -1,6 +1,10 @@
+require_relative 'cell'
+
 class Sudoku
   def initialize(board_string)
   end
+
+
 
   def solve
   end
