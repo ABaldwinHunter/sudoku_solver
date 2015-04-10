@@ -24,6 +24,7 @@ class Sudoku
   end
 
   def board
+
   end
 
   # Returns a nicely formatted string representing the current state of the board
