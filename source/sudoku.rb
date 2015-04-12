@@ -77,6 +77,7 @@ class Sudoku
 
   def reset_board
     self.board = []
+    self.impossible_board = false
     self.initialize_cells!(board_state_before_logic_failed)
   end
 
@@ -98,7 +99,7 @@ class Sudoku
         end
       end
       if logic_failed?
-        self.board_state_before_logic_failed = self.to_s
+        self.board_state_before_logic_failed = board_state_before_logic_failed || self.to_s
         brute_force_solve!
       end
       if impossible_board
