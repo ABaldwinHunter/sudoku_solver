@@ -82,6 +82,7 @@ class Sudoku
   def solve!
     self.last_board = board.dup
     if solved?
+      print_board
       puts "DONE!"
       return true
     else
@@ -91,6 +92,7 @@ class Sudoku
           cell.determine!
         end
         print_board
+        clear_screen!
       end
       if logic_failed?
         self.board_state_before_logic_failed = self.to_s
@@ -138,11 +140,10 @@ class Sudoku
       end
     end
     puts "-------------------------"
-    clear_screen!
   end
 
   def clear_screen!
-    sleep 0.2
+    sleep 0.1
     print "\e[2J"
   end
 end
