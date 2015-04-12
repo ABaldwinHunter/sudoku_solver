@@ -81,9 +81,7 @@ class Sudoku
 
   # Returns a nicely formatted string representing the current state of the board
   def to_s
-    board.each do |cell|
-      print cell.to_s
-    end
+    board.map {|cell| cell.to_s }.join("")
   end
 
   def print_board
