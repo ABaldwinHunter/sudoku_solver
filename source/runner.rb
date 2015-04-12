@@ -16,9 +16,11 @@ strings = File.readlines("sudoku_puzzles.txt").map {|string| string.chomp}
 games = strings.map {|string| Sudoku.new(string)}
 
 games.each_with_index do |game, i|
-  game.title = "SUDOKU PUZZLE #{i+1}"
-  game.solve!
-  sleep 1.0
+  if i > 3
+    game.title = "SUDOKU PUZZLE #{i+1}"
+    game.solve!
+    sleep 1.0
+  end
 end
 
 # board_string = File.readlines('sudoku_puzzles.txt').first.chomp
