@@ -92,10 +92,31 @@ class Sudoku
         end
         print_board
       end
+      if logic_failed?
+        self.board_state_before_logic_failed = self.to_s
+        brute_force_solve!
+      end
+      if impossible_board
+        reset_board
+      end
     end
     solve!
   end
 
+  def brute_force_solve!
+    if solved?
+      return true
+    else
+      board.each do |cell|
+        if !cell.contents
+          byebug
+          cell.possibilities = [cell.possibilities[0]] #guess first possibility
+          cell.determine!
+        end
+        solve!
+      end
+    end
+  end
 
   # Returns a nicely formatted string representing the current state of the board
   def to_s
