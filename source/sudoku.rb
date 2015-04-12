@@ -42,19 +42,19 @@ class Sudoku
   end
 
   def check_rows(cell)
-    rows(cell.row).each do |index|
+    rows[cell.row].each do |index|
       cell.possibilities.delete(board[index].contents)
     end
   end
 
   def check_cols(cell)
-    cols(cell.col).each do |index|
+    cols[cell.col].each do |index|
       cell.possibilities.delete(board[index].contents)
     end
   end
 
   def check_blocks(cell)
-    blocks(cell.block).each do |index|
+    blocks[cell.block].each do |index|
       cell.possibilities.delete(board[index].contents)
     end
   end
