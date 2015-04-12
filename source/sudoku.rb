@@ -63,8 +63,19 @@ class Sudoku
     !self.to_s.include?("-")
   end
 
+  def solve!
+    if solved?
+      return true
+    else
+      board.each do |cell|
+        if !cell.contents
+          check_possibilities(cell)
+          cell.determine!
+        end
+        print_board
       end
     end
+    solve!
   end
 
 
