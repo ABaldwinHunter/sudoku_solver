@@ -23,9 +23,44 @@ describe Sudoku do
     it "initializes with cell objects" do
       expect(easy_game.board[0]).to be_an_instance_of(Cell)
     end
+  end
 
-    it "" do
+#board dimensions - array indices
+
+  describe "#rows" do
+    let(:rows) {easy_game.rows}
+    it "returns an array" do
+      expect(rows).to be_an_instance_of(Array)
     end
+
+    it "returns an array with 9 elements" do
+      expect(rows.length).to eq(9)
+    end
+
+    it "returns an array with nested subarrays" do
+      expect(rows[0]).to be_an_instance_of(Array)
+    end
+
+    it "returns rows with length 9" do
+      row = rows[rand(9)]
+      expect(row.length).to eq(9)
+    end
+
+    it "has subarrays of indices in range n..n+8" do
+      row = rows[rand(9)]
+      expect(row[8] - row[0]).to eq(8)
+    end
+
+    it "has subarrays containing numbered indices of board 0-80" do
+      flattened = rows.flatten
+      expect(flattened).to eq([*0..80])
+    end
+  end
+
+  describe "#cols" do
+  end
+
+  describe "#blocks" do
   end
 
 
