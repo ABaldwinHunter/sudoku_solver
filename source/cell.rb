@@ -28,4 +28,8 @@ class Cell
       end
     end
   end
+
+  def to_s
+    contents || "-"
+  end
 end

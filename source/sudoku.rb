@@ -66,7 +66,7 @@ class Sudoku
     board.each_slice(27) do |chunk|
       chunk.each_slice(9) do |row|
         row.each do |cell|
-          print " " + (cell.contents || "-")
+          print cell.to_s + " "
         end
         print "\n"
       end
