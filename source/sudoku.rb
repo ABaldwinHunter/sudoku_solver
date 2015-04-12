@@ -90,10 +90,12 @@ class Sudoku
       board.each do |cell|
         if !cell.contents
           check_possibilities(cell)
-          cell.determine!
+          if cell.possibilities && cell.possibilities.length == 1
+            cell.determine!
+            print_board
+            clear_screen!
+          end
         end
-        print_board
-        clear_screen!
       end
       if logic_failed?
         self.board_state_before_logic_failed = self.to_s

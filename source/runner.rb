@@ -18,7 +18,7 @@ games = strings.map {|string| Sudoku.new(string)}
 games.each_with_index do |game, i|
   game.title = "SUDOKU PUZZLE #{i+1}"
   game.solve!
-  sleep 0.5
+  sleep 1.0
 end
 
 # board_string = File.readlines('sudoku_puzzles.txt').first.chomp
