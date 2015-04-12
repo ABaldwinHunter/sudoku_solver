@@ -45,6 +45,8 @@ class Sudoku
     check_blocks(cell)
     if cell.possibilities && cell.possibilities.length == 0
       self.impossible_board = true
+      puts "checked possibilities, impossible board!"
+      sleep 0.5
     end
   end
 
@@ -71,14 +73,18 @@ class Sudoku
   end
 
   def logic_failed?
+    # byebug
     return false if solved?
-    board.to_s == last_board.to_s
+    board == last_board
   end
 
-  def reset_board
+  def reset_board!
+    p "resetting!"
+    sleep 0.5
     self.board = []
     self.impossible_board = false
     self.initialize_cells!(board_state_before_logic_failed)
+    p "re-initialized board"
   end
 
   def solve!
@@ -98,12 +104,16 @@ class Sudoku
           end
         end
       end
+      if impossible_board
+        p "impossible board!"
+        sleep 0.5
+        reset_board!
+      end
       if logic_failed?
+        p "logic_failed!"
+        sleep 0.5
         self.board_state_before_logic_failed = board_state_before_logic_failed || self.to_s
         brute_force_solve!
-      end
-      if impossible_board
-        reset_board
       end
     end
     solve!
@@ -115,8 +125,11 @@ class Sudoku
     else
       board.each do |cell|
         if !cell.contents
-          byebug
-          cell.possibilities = [cell.possibilities[0]] #guess first possibility
+          # byebug
+          cell.possibilities = [cell.possibilities.sample] #guess first possibility
+          puts "possibilities = #{cell.possibilities}"
+          puts "guessing #{cell.possibilities[0]}"
+          sleep 0.5
           cell.determine!
         end
         solve!
