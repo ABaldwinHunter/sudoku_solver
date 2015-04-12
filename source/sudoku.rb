@@ -125,13 +125,19 @@ class Sudoku
 
   def print_board
     board.each_slice(27) do |chunk|
+      puts "-------------------------"
       chunk.each_slice(9) do |row|
-        row.each do |cell|
-          print cell.to_s + " "
+        print "| "
+        row.each_slice(3) do |third|
+          third.each do |cell|
+            print cell.to_s + " "
+          end
+          print "| "
         end
         print "\n"
       end
     end
+    puts "-------------------------"
     clear_screen!
   end
 
