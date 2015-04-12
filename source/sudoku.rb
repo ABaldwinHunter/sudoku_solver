@@ -80,7 +80,9 @@ class Sudoku
   end
 
   def solve!
+    self.last_board = board.dup
     if solved?
+      puts "DONE!"
       return true
     else
       board.each do |cell|
