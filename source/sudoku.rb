@@ -93,9 +93,11 @@ class Sudoku
         print "\n"
       end
     end
+    clear_screen!
   end
 
   def clear_screen!
+    sleep 0.2
     print "\e[2J"
   end
 end
