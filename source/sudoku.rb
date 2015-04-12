@@ -2,10 +2,11 @@ require_relative 'cell'
 require 'byebug'
 
 class Sudoku
-  attr_accessor :board, :possibilities, :blocks, :last_board, :board_state_before_logic_failed, :impossible_board
+  attr_accessor :board, :possibilities, :blocks, :last_board, :board_state_before_logic_failed, :impossible_board, :title
   attr_reader :x_dim, :board_string
 
   def initialize(board_string)
+    @title
     @board = []
     @blocks
     @x_dim = 9
@@ -126,6 +127,7 @@ class Sudoku
   end
 
   def print_board
+    puts title
     board.each_slice(27) do |chunk|
       puts "-------------------------"
       chunk.each_slice(9) do |row|
@@ -143,7 +145,7 @@ class Sudoku
   end
 
   def clear_screen!
-    sleep 0.1
+    sleep 0.15
     print "\e[2J"
   end
 end
