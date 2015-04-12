@@ -35,6 +35,12 @@ class Sudoku
     blocks = block_corners.map {|i| [i, i+1, i+2, i+9, i+10, i+11, i+18, i+19, i+20]}
   end
 
+  def check_possibilities(cell)
+    check_rows(cell)
+    check_cols(cell)
+    check_blocks(cell)
+  end
+
   def check_rows(cell)
     rows(cell.row).each do |index|
       cell.possibilities.delete(board[index].contents)
