@@ -2,13 +2,16 @@ require_relative 'cell'
 require 'byebug'
 
 class Sudoku
-  attr_accessor :board, :possibilities, :blocks
+  attr_accessor :board, :possibilities, :blocks, :last_board, :board_state_before_logic_failed, :impossible_board
   attr_reader :x_dim, :board_string
 
   def initialize(board_string)
     @board = []
     @blocks
     @x_dim = 9
+    @board_state_before_logic_failed #board_string
+    @last_board
+    @impossible_board
     initialize_cells!(board_string)
   end
 
