@@ -1,6 +1,6 @@
 class Cell
   attr_accessor :index, :contents, :possibilities, :sudoku, :block
-  attr_reader :board, :col, :row
+  attr_reader :board, :col, :row, :x_dim
 
   def initialize(args)
     @index = args[:index]
@@ -13,8 +13,14 @@ class Cell
     get_block
   end
 
+  def determine!
+    if possibilities && possibilities.length == 1
+      self.contents = possibilities[0]
+    end
+  end
+
   def row
-    index % x_dim
+    index/x_dim
   end
 
   def col
