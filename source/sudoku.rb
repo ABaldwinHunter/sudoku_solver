@@ -41,33 +41,41 @@ class Sudoku
   end
 
   def blocks
+    return @blocks if @blocks
     block_corners = [0, 3, 6, 27, 30, 33, 54, 57, 60]
-    block_corners.map {|i| [i, i+1, i+2, i+9, i+10, i+11, i+18, i+19, i+20]}
+    blocks = block_corners.map {|i| [i, i+1, i+2, i+9, i+10, i+11, i+18, i+19, i+20]}
   end
 
-  def solve
+  def solve!
+    board.each do |cell|
+      if cell == 0
+
+      end
+    end
   end
 
-  def board
-
-  end
 
   # Returns a nicely formatted string representing the current state of the board
   def to_s
+    board.each do |cell|
+      print cell.contents || "-"
+    end
   end
 
   def print_board
-
-
-
+    board.each_slice(27) do |chunk|
+      chunk.each_slice(9) do |row|
+        row.each do |cell|
+          print " " + (cell.contents || "-")
+        end
+        print "\n"
+      end
+    end
   end
 
   def clear_screen!
     print "\e[2J"
   end
-
-
-
 end
 
   # 0   1   2   3  4  5   6   7   8
