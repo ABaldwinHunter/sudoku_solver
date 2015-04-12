@@ -1,4 +1,5 @@
 require_relative 'cell'
+require 'byebug'
 
 class Sudoku
   attr_accessor :board, :possibilities, :blocks

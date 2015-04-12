@@ -20,3 +20,7 @@ game = Sudoku.new(board_string)
 puts game
 game.print_board
 
+game.solve!
+
+
+
