@@ -22,11 +22,10 @@ class Cell
   end
 
   def get_block
-    board.blocks.each_with_index do |block, i|
+    sudoku.blocks.each_with_index do |block, i|
       if block.include?(self.index)
         self.block = i
       end
     end
   end
-
 end
