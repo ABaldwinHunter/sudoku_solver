@@ -39,6 +39,9 @@ class Sudoku
     check_rows(cell)
     check_cols(cell)
     check_blocks(cell)
+    if cell.possibilities && cell.possibilities.length == 0
+      self.impossible_board = true
+    end
   end
 
   def check_rows(cell)
