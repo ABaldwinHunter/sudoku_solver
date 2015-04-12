@@ -69,6 +69,16 @@ class Sudoku
     !self.to_s.include?("-")
   end
 
+  def logic_failed?
+    return false if solved?
+    board.to_s == last_board.to_s
+  end
+
+  def reset_board
+    self.board = []
+    self.initialize_cells!(board_state_before_logic_failed)
+  end
+
   def solve!
     if solved?
       return true
