@@ -59,9 +59,9 @@ class Sudoku
     end
   end
 
-  def solve!
-    board.each do |cell|
-      if cell == 0
+  def solved?
+    !self.to_s.include?("-")
+  end
 
       end
     end
