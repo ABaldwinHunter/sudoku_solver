@@ -1,35 +1,23 @@
 require_relative 'cell'
 
 class Sudoku
-  attr_accessor :board, :possibilities
-  attr_reader :x_dim
+  attr_accessor :board, :possibilities, :blocks
+  attr_reader :x_dim, :board_string
 
   def initialize(board_string)
-    @board = board_string.split("")
-    @possibilities = Hash.new
-    initialize_possibilities!
+    @board = []
+    @blocks
     @x_dim = 9
+    initialize_cells!(board_string)
   end
 
-  def initialize_possibilities!
-    board.each_with_index do |ele, i|
-      if ele == "-"
-        possibilities[i] = [*"1".."9"]
-      end
+  def initialize_cells!(board_string)
+    sudoku = self
+    board_string.split("").each_with_index do |ele, i|
+      cell = Cell.new(index: i, sudoku: sudoku)
+      ele == "-" ? cell.possibilities = [*"1".."9"] : cell.contents = ele
+      self.board << cell
     end
-  end
-
-  def check_row
-
-
-  end
-
-  def check_col
-
-  end
-
-  def check_block
-
   end
 
   def rows
@@ -44,6 +32,24 @@ class Sudoku
     return @blocks if @blocks
     block_corners = [0, 3, 6, 27, 30, 33, 54, 57, 60]
     blocks = block_corners.map {|i| [i, i+1, i+2, i+9, i+10, i+11, i+18, i+19, i+20]}
+  end
+
+  def check_rows(cell)
+    rows(cell.row).each do |index|
+      cell.possibilities.delete(board[index].contents)
+    end
+  end
+
+  def check_cols(cell)
+    cols(cell.col).each do |index|
+      cell.possibilities.delete(board[index].contents)
+    end
+  end
+
+  def check_blocks(cell)
+    blocks(cell.block).each do |index|
+      cell.possibilities.delete(board[index].contents)
+    end
   end
 
   def solve!
