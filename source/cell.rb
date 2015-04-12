@@ -1,14 +1,14 @@
 class Cell
-  attr_accessor :index, :contents, :determined, :possibilities
-  attr_reader :board, :col, :row, :block
+  attr_accessor :index, :contents, :possibilities, :sudoku, :block
+  attr_reader :board, :col, :row
 
   def initialize(args)
     @index = args[:index]
     @contents = args[:contents] || nil
-    @determined
     @possibilities
-    @board = args[:board]
-    @x_dim = board.x_dim || 9
+    @sudoku = args[:sudoku]
+    @board = args[:board] || sudoku.board
+    @x_dim = sudoku.x_dim || 9
     @block
     get_block
   end
