@@ -2,17 +2,19 @@ require_relative 'cell'
 require 'byebug'
 
 class Sudoku
-  attr_accessor :board, :possibilities, :blocks, :last_board, :board_state_before_logic_failed, :impossible_board, :title
+  attr_accessor :board, :possibilities, :blocks, :last_board, :board_state_before_logic_failed, :impossible_board, :title, :changed_this_round
   attr_reader :x_dim, :board_string
 
   def initialize(board_string)
     @title
+    @board_string = board_string
     @board = []
     @blocks
     @x_dim = 9
     @board_state_before_logic_failed #board_string
     @last_board
     @impossible_board
+    @changed_this_round = 0
     initialize_cells!(board_string)
   end
 
@@ -40,13 +42,16 @@ class Sudoku
   end
 
   def check_possibilities(cell)
+    num_before = cell.possibilities.length
     check_rows(cell)
     check_cols(cell)
     check_blocks(cell)
+    num_after = cell.possibilities.length
+    self.changed_this_round += 1 if num_after < num_before
     if cell.possibilities && cell.possibilities.length == 0
       self.impossible_board = true
       puts "checked possibilities, impossible board!"
-      sleep 0.5
+      # sleep 0.5
     end
   end
 
@@ -72,26 +77,29 @@ class Sudoku
     !self.to_s.include?("-")
   end
 
-  def logic_failed?
+  def induction_failed?
     # byebug
     return false if solved?
-    board == last_board
+    # board == last_board
+    changed_this_round == 0
   end
 
   def reset_board!
     p "resetting!"
-    sleep 0.5
+    # sleep 0.5
     self.board = []
     self.impossible_board = false
-    self.initialize_cells!(board_state_before_logic_failed)
+    self.initialize_cells!(board_string)
+    # self.initialize_cells!(board_state_before_logic_failed)
     p "re-initialized board"
   end
 
   def solve!
-    self.last_board = board.dup
+    self.changed_this_round = 0
     if solved?
       print_board
       puts "DONE!"
+      sleep 1.0
       return true
     else
       board.each do |cell|

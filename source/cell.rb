@@ -18,6 +18,7 @@ class Cell
       self.contents = possibilities[0]
       p possibilities
       self.possibilities = nil
+      sudoku.changed_this_round += 1
     end
   end
 
