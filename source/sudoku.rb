@@ -45,7 +45,7 @@ class Sudoku
     check_cols(cell)
     check_blocks(cell)
     possibilities_after = cell.possibilities.length
-    self.changed_this_round += 1 if num_after < num_before
+    self.changed_this_round += 1 if possibilities_after < possibilities_before
     if cell.possibilities && cell.possibilities.length == 0
       self.impossible_board = true
       puts "checked possibilities, impossible board!"
