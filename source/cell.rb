@@ -16,8 +16,8 @@ class Cell
   def determine!
     if possibilities && possibilities.length == 1
       self.contents = possibilities[0]
-      p possibilities
-      self.possibilities = nil
+      # p possibilities
+      self.possibilities = nil #determined cells have nil for possibilities
       sudoku.changed_this_round += 1
     end
   end
