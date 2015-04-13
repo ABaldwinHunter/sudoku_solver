@@ -23,6 +23,13 @@ describe Sudoku do
     it "initializes with cell objects" do
       expect(easy_game.board[0]).to be_an_instance_of(Cell)
     end
+
+    it "initializes with @impossible board as nil" do
+      expect(easy_game.impossible_board).to be(nil)
+    end
+
+
+
   end
 
 #board dimensions - array indices
