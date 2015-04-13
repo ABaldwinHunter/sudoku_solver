@@ -40,11 +40,11 @@ class Sudoku
   end
 
   def check_possibilities(cell)
-    num_before = cell.possibilities.length
+    possibilities_before = cell.possibilities.length
     check_rows(cell)
     check_cols(cell)
     check_blocks(cell)
-    num_after = cell.possibilities.length
+    possibilities_after = cell.possibilities.length
     self.changed_this_round += 1 if num_after < num_before
     if cell.possibilities && cell.possibilities.length == 0
       self.impossible_board = true
