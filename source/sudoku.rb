@@ -78,9 +78,7 @@ class Sudoku
   end
 
   def induction_failed?
-    # byebug
     return false if solved?
-    # board == last_board
     changed_this_round == 0
   end
 
@@ -90,7 +88,6 @@ class Sudoku
     self.board = []
     self.impossible_board = false
     self.initialize_cells!(board_string)
-    # self.initialize_cells!(board_state_before_logic_failed)
     p "re-initialized board"
   end
 
@@ -107,42 +104,35 @@ class Sudoku
           check_possibilities(cell)
           if cell.possibilities && cell.possibilities.length == 1
             cell.determine!
-            print_board
-            clear_screen!
+            # print_board
+            # clear_screen!
           end
         end
       end
       if impossible_board
         p "impossible board!"
-        sleep 0.5
+        # sleep 0.5
         reset_board!
+      elsif induction_failed?
+        p "induction_failed!"
+        # sleep 0.5
+        guess
       end
-      if logic_failed?
-        p "logic_failed!"
-        sleep 0.5
-        self.board_state_before_logic_failed = board_state_before_logic_failed || self.to_s
-        brute_force_solve!
-      end
-    end
     solve!
+    end
   end
 
-  def brute_force_solve!
-    if solved?
-      return true
-    else
-      board.each do |cell|
-        if !cell.contents
-          # byebug
-          cell.possibilities = [cell.possibilities.sample] #guess first possibility
-          puts "possibilities = #{cell.possibilities}"
-          puts "guessing #{cell.possibilities[0]}"
-          sleep 0.5
-          cell.determine!
-        end
-        solve!
+  def guess
+    board.each do |cell|
+      if !cell.contents
+        cell.possibilities = [cell.possibilities.sample] #guess random possibility
+        puts "possibilities = #{cell.possibilities}"
+        puts "guessing #{cell.possibilities[0]}"
+        # sleep 0.5
+        cell.determine!
+        return
       end
-    end
+     end
   end
 
   # Returns a nicely formatted string representing the current state of the board
