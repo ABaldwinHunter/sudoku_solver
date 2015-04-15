@@ -12,9 +12,21 @@ require_relative 'sudoku'
 # Remember, the file has newline characters at the end of each line,
 # so we call String#chomp to remove them.
 
+strings = File.readlines("sudoku_puzzles.txt").map {|string| string.chomp}
+games = strings.map {|string| Sudoku.new(string)}
 
-board_string = File.readlines('sudoku_puzzles.txt').first.chomp
+games.each_with_index do |game, i|
+  game.title = "SUDOKU PUZZLE #{i+1}"
+  game.solve!
+  sleep 1.0
+end
 
-game = Sudoku.new(board_string)
-game.solve
-puts game
+# board_string = File.readlines('sudoku_puzzles.txt').first.chomp
+
+# game = Sudoku.new(board_string)
+# # game.solve
+# puts game
+# game.print_board
+# game.solve!
+
+
